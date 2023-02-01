@@ -29,3 +29,20 @@ form {
     cursor: pointer;
   }
   
+  table {
+    margin: 10px auto 10px 250px; /* center the table horizontally */
+    border-collapse: collapse;
+    width: 80%; /* adjust the width as needed */
+    padding-left: 200px; /* add left padding to offset the sidebar */
+  }
+  
+  th, td {
+    border: 1px solid #dddddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #dddddd;
+  }
+  
