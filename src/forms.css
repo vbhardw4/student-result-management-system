@@ -46,3 +46,64 @@ form {
     background-color: #dddddd;
   }
   
+  /* select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    appearance: none;
+    background-color: white;
+    width: 100%;
+  }
+  
+  option {
+    padding: 10px;
+    font-size: 16px;
+  } */
+  
+  .form-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+  
+  .form-group label{
+    font-weight: bold;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+
+  select, option {
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    appearance: none;
+    background-color: white;
+  }
+  
+  select {
+    width: 200px;
+  }
+  
+
+  label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+.success-message {
+  font-size: 20px;
+  color: green;
+  text-align: center;
+  margin-top: 20px;
+}

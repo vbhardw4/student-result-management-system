@@ -28,22 +28,29 @@ const ResultsForm = () => {
 
   return (
     <div>
+    <div class="form-container">
     <>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Course Name:</label>
-          <select
-            value={courseName}
-            onChange={(event) => setCourseName(event.target.value)}
-          >
-            <option value="">Select a course</option>
-            {/* populate options with actual course names */}
-            <option value="course1">Course 1</option>
-            <option value="course2">Course 2</option>
-            <option value="course3">Course 3</option>
-          </select>
+      {showSuccessMessage && (
+        <div className="success-message">
+          Results added successfully!
         </div>
-        <div>
+      )}
+      <form onSubmit={handleSubmit}>
+        <div class="form-group">
+            <label>Course Name:</label>            
+            <select
+              value={courseName}
+              onChange={(event) => setCourseName(event.target.value) }
+              
+            >
+              <option value="">Select a course</option>
+              {/* populate options with actual course names */}
+              <option value="course1">Course 1</option>
+              <option value="course2">Course 2</option>
+              <option value="course3">Course 3</option>
+            </select>
+        </div>
+        <div class="form-group">
           <label>Student Name:</label>
           <select
             value={studentName}
@@ -56,7 +63,7 @@ const ResultsForm = () => {
             <option value="student3">Student 3</option>
           </select>
         </div>
-        <div>
+        <div class="form-group">
           <label>Score:</label>
           <select value={score} onChange={(event) => setScore(event.target.value)}>
             <option value="">Select a score</option>
@@ -70,14 +77,9 @@ const ResultsForm = () => {
         </div>
         <button type="submit">Submit</button>
       </form>
-      {showSuccessMessage && (
-        <div style={{ backgroundColor: "green", color: "white" }}>
-          Result added successfully!
-        </div>
-      )}
     
     </>
-
+    </div>
       {results.length !== 0 && <table>
         <thead>
           <tr>
