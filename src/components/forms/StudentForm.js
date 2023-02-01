@@ -7,7 +7,7 @@ const StudentForm = () => {
   const [lastName, setLastName] = useState("");
   const [dob, setDob] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
-
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -17,13 +17,19 @@ const StudentForm = () => {
     const dobDate = new Date(dob);
     const age = today.getFullYear() - dobDate.getFullYear();
 
-    setStudents([...students, { firstName, lastName, dob }]);
 
     if (!firstName || !lastName || !dob) {
       setErrorMessage('All fields are required');
     } else if (isNaN(dobDate.getTime()) || age < 10) {
       setErrorMessage('Date of birth must be a valid date and the student must be at least 10 years old');
     } else {
+      setStudents([...students, { firstName, lastName, dob }]);
+      // logic to add the result to the system
+      setShowSuccessMessage(true);
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 5000);
+    
       console.log('Form submitted with values:');
       console.log('First Name: ', firstName);
       console.log('Last Name: ', lastName);
@@ -35,8 +41,14 @@ const StudentForm = () => {
   };
 
   return (
-   <div>
-      <form onSubmit={handleSubmit}>
+    <div>
+    <div className="form-container">
+      {showSuccessMessage && (
+        <div className="success-message">
+          Student added successfully!
+        </div>
+      )}
+      <form onSubmit={handleSubmit} className="form-group">
         <div>
           <label htmlFor="first-name">First Name:</label>
           <input
@@ -70,7 +82,8 @@ const StudentForm = () => {
         {errorMessage && <div>{errorMessage}</div>}
         <button type="submit" className="submit-button">Submit</button>
       </form>
-
+      </div>
+      <div>
       {students.length !== 0 && <table>
           <thead>
             <tr>
@@ -89,7 +102,7 @@ const StudentForm = () => {
             ))}
           </tbody>
         </table>}
-
+        </div>
     </div> 
   );
   

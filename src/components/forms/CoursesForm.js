@@ -26,6 +26,11 @@ const CoursesForm = () => {
   return (
     <div>
     <>
+      {showSuccessMessage && (
+        <div className="success-message">
+          Course added successfully!
+        </div>
+      )}
       <form onSubmit={handleSubmit}>
       <div>
         <label htmlFor="first-name">Course Name:</label>
@@ -39,29 +44,23 @@ const CoursesForm = () => {
       </div>
         <button type="submit" className="submit-button">Submit</button>
       </form>
-      {showSuccessMessage && (
-        <div style={{ backgroundColor: "green", color: "white" }}>
-          Result added successfully!
-        </div>
-      )}
     </>
-
-      {courses.length !== 0 && <table>
-        <thead>
-          <tr>
-            <th>Course Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {courses.map((course, index) => (
-            <tr key={index}>
-              <td>{course.courseName}</td>
+      <div>
+        {courses.length !== 0 && <table>
+          <thead>
+            <tr>
+              <th>Course Name</th>
             </tr>
-          ))}
-        </tbody>
-      </table>}
-
-
+          </thead>
+          <tbody>
+            {courses.map((course, index) => (
+              <tr key={index}>
+                <td>{course.courseName}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>}
+      </div>
     </div>
   );
 };
