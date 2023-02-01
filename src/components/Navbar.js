@@ -4,6 +4,7 @@ import Courses from './Courses';
 import Results from './Results';
 import Students from './Students';
 import Home from './Home';
+import '../index.css';
 
 const Navbar = () => {
   return (
