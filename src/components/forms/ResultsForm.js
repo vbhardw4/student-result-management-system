@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import '../../forms.css';
 
 const ResultsForm = () => {
+  const [results, setResults] = useState([]);
   const [courseName, setCourseName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [score, setScore] = useState("");
@@ -13,17 +14,20 @@ const ResultsForm = () => {
       alert("Please select a course, student and score");
       return;
     }
+    
     // logic to add the result to the system
     setShowSuccessMessage(true);
     setTimeout(() => {
       setShowSuccessMessage(false);
     }, 5000);
+    setResults([...results, { courseName, studentName, score }]);
     setCourseName("");
     setStudentName("");
     setScore("");
   };
 
   return (
+    <div>
     <>
       <form onSubmit={handleSubmit}>
         <div>
@@ -71,7 +75,29 @@ const ResultsForm = () => {
           Result added successfully!
         </div>
       )}
+    
     </>
+
+      {results.length !== 0 && <table>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+          </tr>
+        </thead>
+        <tbody>
+          {results.map((results, index) => (
+            <tr key={index}>
+              <td>{results.courseName}</td>
+              <td>{results.studentName}</td>
+              <td>{results.score}</td>
+            </tr>
+          ))}
+        </tbody>
+        </table>}
+
+    </div>
   );
 };
 
