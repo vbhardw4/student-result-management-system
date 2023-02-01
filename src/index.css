@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  height: 100%;
+  background-color: lightgray;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  padding: 10px;
+  text-align: center;
+  /* background-color: white; */
+  color: black;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+.menu-item:hover {
+  background-color: lightblue;
+  color: white;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
