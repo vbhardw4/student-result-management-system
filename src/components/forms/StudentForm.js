@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import '../../forms.css';
+import {addStudent} from '../../redux/actions/studentActions';
+import { useSelector } from 'react-redux';
 
-const StudentForm = () => {
-  const [students, setStudents] = useState([]);
+const mapDispatchToProps = (dispatch) => ({
+  addStudent: (student) => dispatch(addStudent(student))
+});
+
+const StudentForm = (props) => {
+  const students = useSelector(state => state.students);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dob, setDob] = useState("");
   const [errorMessage, setErrorMessage] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,8 +32,8 @@ const StudentForm = () => {
     } else if (isNaN(dobDate.getTime()) || age < 10) {
       setErrorMessage('Date of birth must be a valid date and the student must be at least 10 years old');
     } else {
-      setStudents([...students, { firstName, lastName, dob }]);
-      // logic to add the result to the system
+      const student = { firstName, lastName, dob };
+      props.addStudent(student);
       setShowSuccessMessage(true);
       setTimeout(() => {
         setShowSuccessMessage(false);
@@ -39,6 +48,7 @@ const StudentForm = () => {
       setDob("");
     }
   };
+
 
   return (
     <div>
@@ -84,7 +94,7 @@ const StudentForm = () => {
       </form>
       </div>
       <div>
-      {students.length !== 0 && <table>
+      {students.length!==0 && <table>
           <thead>
             <tr>
               <th>First Name</th>
@@ -106,6 +116,8 @@ const StudentForm = () => {
     </div> 
   );
   
+  
 };
 
-export default StudentForm;
+// export default StudentForm;
+export default connect(null, mapDispatchToProps)(StudentForm);
