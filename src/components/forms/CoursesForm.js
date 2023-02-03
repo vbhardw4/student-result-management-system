@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import '../../forms.css';
+import { useSelector, connect } from 'react-redux';
+import {addCourseAction} from '../../redux/actions/coursesActions';
 
-const CoursesForm = () => {
-  const [courses, setCourses] = useState([]);
+const mapDispatchToProps = (dispatch) => ({
+  addCourseAction: (result) => dispatch(addCourseAction(result))
+});
+
+const CoursesForm = (props) => {
+  // const [courses, setCourses] = useState([]);
+  const courses = useSelector(state=>state.courses)
   const [courseName, setCourseName] = useState("");
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
@@ -12,8 +19,10 @@ const CoursesForm = () => {
       alert("Please enter a course name to submit");
       return;
     }
-    setCourses([...courses, { courseName}]);
+    // setCourses([...courses, { courseName}]);
     // logic to add the result to the system
+    const result = {courseName};
+    props.addCourseAction(result);
     setShowSuccessMessage(true);
     setTimeout(() => {
       setShowSuccessMessage(false);
@@ -65,4 +74,5 @@ const CoursesForm = () => {
   );
 };
 
-export default CoursesForm;
+// export default CoursesForm;
+export default connect(null, mapDispatchToProps)(CoursesForm);
