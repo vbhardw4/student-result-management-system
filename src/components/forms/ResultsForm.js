@@ -10,6 +10,9 @@ const mapDispatchToProps = (dispatch) => ({
 const ResultsForm = (props) => {
   // const [results, setResults] = useState([]);
   const results = useSelector(state=>state.results)
+  const students = useSelector(state=>state.students)
+  const courses = useSelector(state=>state.courses)
+
   const [courseName, setCourseName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [score, setScore] = useState("");
@@ -27,7 +30,7 @@ const ResultsForm = (props) => {
     setTimeout(() => {
       setShowSuccessMessage(false);
     }, 5000);
-    // setResults([...results, { courseName, studentName, score }]);
+
     const result = { courseName, studentName, score };
     props.addResultAction(result);
     setCourseName("");
@@ -54,9 +57,10 @@ const ResultsForm = (props) => {
             >
               <option value="">Select a course</option>
               {/* populate options with actual course names */}
-              <option value="course1">Course 1</option>
-              <option value="course2">Course 2</option>
-              <option value="course3">Course 3</option>
+              {courses.map((course, index) => (
+                <option value={course.courseName}>{course.courseName}</option>
+            ))}
+
             </select>
         </div>
         <div class="form-group">
@@ -67,9 +71,10 @@ const ResultsForm = (props) => {
           >
             <option value="">Select a student</option>
             {/* populate options with actual student names */}
-            <option value="student1">Student 1</option>
-            <option value="student2">Student 2</option>
-            <option value="student3">Student 3</option>
+            {students.map((student, index) => (
+                <option value={student.firstName+" "+student.lastName}>{student.firstName} {student.lastName}</option>
+            ))}
+
           </select>
         </div>
         <div class="form-group">
