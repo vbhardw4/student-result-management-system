@@ -1,8 +1,15 @@
 import React, { useState } from "react";
 import '../../forms.css';
+import { useSelector, connect } from 'react-redux';
+import {addResultAction} from '../../redux/actions/resultsActions';
 
-const ResultsForm = () => {
-  const [results, setResults] = useState([]);
+const mapDispatchToProps = (dispatch) => ({
+  addResultAction: (result) => dispatch(addResultAction(result))
+});
+
+const ResultsForm = (props) => {
+  // const [results, setResults] = useState([]);
+  const results = useSelector(state=>state.results)
   const [courseName, setCourseName] = useState("");
   const [studentName, setStudentName] = useState("");
   const [score, setScore] = useState("");
@@ -20,7 +27,9 @@ const ResultsForm = () => {
     setTimeout(() => {
       setShowSuccessMessage(false);
     }, 5000);
-    setResults([...results, { courseName, studentName, score }]);
+    // setResults([...results, { courseName, studentName, score }]);
+    const result = { courseName, studentName, score };
+    props.addResultAction(result);
     setCourseName("");
     setStudentName("");
     setScore("");
@@ -83,9 +92,9 @@ const ResultsForm = () => {
       {results.length !== 0 && <table>
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Date of Birth</th>
+            <th>Course Name</th>
+            <th>Student Name</th>
+            <th>Score</th>
           </tr>
         </thead>
         <tbody>
@@ -103,4 +112,5 @@ const ResultsForm = () => {
   );
 };
 
-export default ResultsForm;
+// export default ResultsForm;
+export default connect(null, mapDispatchToProps)(ResultsForm);
