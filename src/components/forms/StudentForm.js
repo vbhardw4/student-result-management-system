@@ -9,16 +9,17 @@ const mapDispatchToProps = (dispatch) => ({
   addStudentAction: (student) => dispatch(addStudentAction(student))
 });
 
+
 const StudentForm = (props) => {
   let studentList = useSelector(state => state.students);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dob, setDob] = useState("");
-  // const [age, setAge] = useState("");
+
   const [errorMessage, setErrorMessage] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const sortedStudents = [...studentList].sort((a,b)=>b.age-a.age);
-  // const sortedList=[...studentList];
+
   
 
   const handleSubmit = (event) => {
@@ -36,10 +37,10 @@ const StudentForm = (props) => {
       setErrorMessage('Date of birth must be a valid date and the student must be at least 10 years old');
     } else {
       const student = { firstName, lastName, dob, age };
-      // const studentName = firstName+lastName;
-      // const student = {studentName,dob};
-      // props.addStudentAction(student);
-      axios.post('http://localhost:8080/api/v1/students',student)
+
+      console.log('process.env is '+JSON.stringify(process.env));
+      console.log('process.env is API_HOST'+JSON.stringify(process.env.API_HOST));
+      axios.post(`http://localhost:8080/api/v1/students`,student)
            .then(req=>{
               let student = req.data;
               setShowSuccessMessage(true);
@@ -49,9 +50,9 @@ const StudentForm = (props) => {
               
               console.log('Form submitted with values:');
               console.log('Full Name: ', student.studentName);
-              // console.log('Last Name: ', student.lastName);
+        
               console.log('Date of Birth: ', student.dob);
-              // console.log('Date of Birth: ', student.age);
+             
               props.addStudentAction(student);
               setFirstName("");
               setLastName("");
@@ -64,19 +65,6 @@ const StudentForm = (props) => {
     };
 
   }
-
-  // function sortStudents() {
-  //   let sortedStudents = [];
-  //   for (var student in studentList) {
-  //   sortedStudents.push([student]);
-  // }
-
-  // sortedStudents.sort(function(a, b) {
-  //     return a[1] - b[1];
-  // });
-  // studentList = sortedStudents;
-  // console.log(`Students sorted as per age!`+JSON.stringify(studentList));
-  // }
 
   return (
     <div>
