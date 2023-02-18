@@ -39,7 +39,7 @@ const StudentForm = (props) => {
       const student = { firstName, lastName, dob, age };
 
       console.log('process.env is '+JSON.stringify(process.env));
-      console.log('process.env is API_HOST'+JSON.stringify(process.env.API_HOST));
+      
       axios.post(`http://localhost:8080/api/v1/students`,student)
            .then(req=>{
               let student = req.data;
