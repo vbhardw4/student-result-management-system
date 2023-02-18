@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-management-system-app
+spec:
+  selector:
+    matchLabels:
+      app: student-management-system-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: student-management-system-app
+    spec:
+      containers:
+        - name: student-result-management-front-end
+          image: student-result-management-front-end:0.0.1-snapshot
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          env:
+            - name: API_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: postgres-config
+                  key: API_HOST
+
+---
+
+apiVersion: v1 # Kubernetes API Version
+kind: Service #Kubernetes' resource kind we are creating
+metadata:
+  name: student-management-system-svc
+  labels:
+    app: student-management-system-app
+    tier: frontend
+spec:
+  selector:
+    app: student-management-system-app
+  ports:
+    - protocol: "TCP"
+      port: 3000 # The Port that this service is running on in the cluster
+      targetPort: 3000 # The Port exposed by the service.
+  type: NodePort
