@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const StudentForm = (props) => {
-  let studentList = useSelector(state => state.students);
+  const studentList = useSelector(state => state.students);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [dob, setDob] = useState("");
